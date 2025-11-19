@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>AUTO PIT STOP</title>
+    <title>ROYAL CARS - Car Rental HTML Template</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
@@ -39,9 +39,9 @@
                     <img class="w-100" src="img/carousel-1.jpg" alt="Image">
                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                         <div class="p-3" style="max-width: 900px;">
-                            <h4 class="text-white text-uppercase mb-md-3"></h4>
-                            <h1 class="display-1 text-white mb-md-4">ADMIN </h1>
-                            
+                            <h4 class="text-white text-uppercase mb-md-3">Rent A Car</h4>
+                            <h1 class="display-1 text-white mb-md-4">Best Rental Cars In Your Location</h1>
+                            <a href="" class="btn btn-primary py-md-3 px-md-5 mt-2">Reserve Now</a>
                         </div>
                     </div>
                 </div>
@@ -49,9 +49,9 @@
                     <img class="w-100" src="img/carousel-2.jpg" alt="Image">
                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                         <div class="p-3" style="max-width: 900px;">
-                            <h4 class="text-white text-uppercase mb-md-3"></h4>
-                            <h1 class="display-1 text-white mb-md-4">ADMIN</h1>
-                            
+                            <h4 class="text-white text-uppercase mb-md-3">Rent A Car</h4>
+                            <h1 class="display-1 text-white mb-md-4">Quality Cars with Unlimited Miles</h1>
+                            <a href="" class="btn btn-primary py-md-3 px-md-5 mt-2">Reserve Now</a>
                         </div>
                     </div>
                 </div>

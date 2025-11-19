@@ -1,10 +1,14 @@
+<?php
+include_once("../shares/db/mydatabase.inc");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
-    
     <meta charset="utf-8">
-    <title>AUTOPIT</title>
+    <title>AUTO PIT </title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
@@ -32,51 +36,107 @@
 
 <body>
     <!-- Topbar Start -->
-    
-    
+    <div class="container-fluid bg-dark py-3 px-lg-5 d-none d-lg-block">
+        <div class="row">
+            <div class="col-md-6 text-center text-lg-left mb-2 mb-lg-0">
+                <div class="d-inline-flex align-items-center">
+                    <a class="text-body pr-3" href=""><i class="fa fa-phone-alt mr-2"></i>9987654321</a>
+                    <span class="text-body">|</span>
+                    <a class="text-body px-3" href=""><i class="fa fa-envelope mr-2"></i>autopit@gmail.com</a>
+                </div>
+            </div>
+            <div class="col-md-6 text-center text-lg-right">
+                <div class="d-inline-flex align-items-center">
+                    <a class="text-body px-3" href="">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a class="text-body px-3" href="">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a class="text-body px-3" href="">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a class="text-body px-3" href="">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a class="text-body pl-3" href="">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Topbar End -->
 
 
     <!-- Navbar Start -->
-<div class="container-fluid position-relative nav-bar p-0">
-    <div class="position-relative px-lg-5" style="z-index: 9;">
-        <nav class="navbar navbar-expand-lg bg-secondary navbar-dark py-3 py-lg-0 pl-3 pl-lg-5">
-            <a href="index.php" class="navbar-brand d-flex align-items-center">
-                <i class="fa-solid fa-car-side text-warning mr-2" style="font-size: 26px;"></i>
-                <h1 class="text-uppercase text-primary mb-0" style="letter-spacing: 1px;">AUTO PIT</h1>
+    <div class="container-fluid position-relative nav-bar p-0">
+        <div class="position-relative px-lg-5" style="z-index: 9;">
+            <nav class="navbar navbar-expand-lg bg-secondary navbar-dark py-3 py-lg-0 pl-3 pl-lg-5">
+                <a href="index.php" class="navbar-brand">
+                    <h1 class="text-uppercase text-primary mb-1">AUTO PIT </h1>
+                </a>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
+                    <div class="navbar-nav ml-auto py-0">
+                        <a href="index.php" class="nav-item nav-link active">Home</a>
+                        <a href="search.php" class="nav-item nav-link">Search</a>
+    
+    <div class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Category</a>
+    <div class="dropdown-menu fade-up m-0">
+        <?php 
+        $sql="SELECT * FROM add_category";
+        $tbl=getDatas($sql);
+        if($tbl != null){
+            foreach($tbl as $row){
+        ?>
+            <a href="servicess.php?mode=<?php echo urlencode($row[1]);?>" class="dropdown-item">
+                <?php echo htmlspecialchars($row[1]); ?>
             </a>
-            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
-                <div class="navbar-nav ml-auto py-0">
-
-                    <a href="index.php" class="nav-item nav-link active">
-                        <i class="fa-solid fa-house text-warning mr-1"></i>Home
-                    </a>
-
-                    <a href="login.php" class="nav-item nav-link">
-                        <i class="fa-solid fa-right-to-bracket text-warning mr-1"></i>Sign In
-                    </a>
-                    
-                    <a href="about.php" class="nav-item nav-link">
-                        <i class="fa-solid fa-address-card text-warning mr-1"></i>About
-                    </a>
-                    <div class="nav-item dropdown">
-                        <a href="provider_reg.php" class="nav-item nav-link" >
-                            <i class="fa-solid fa-user-plus text-warning mr-1"></i>Become a partner
-                        </a>
-                    </div>
-
-                </div>
-            </div>
-        </nav>
+        <?php
+            }
+        } else {
+            echo '<span class="dropdown-item text-muted">No categories found</span>';
+        }
+        ?>
     </div>
 </div>
-<!-- Navbar End -->
-
-<!-- Add Font Awesome 6 CDN (Replace old 5.x version in your <head>) -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</div>
+</div>
+<div class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">QUICK HELP</a>
+            <div class="dropdown-menu rounded-0 m-0">
+                <a href="emergency.php?mode=Accident" class="dropdown-item">Accident</a>
+                <a href="emergency.php?mode=Breakdown" class="dropdown-item">Breakdown</a>
+                <a href="emergency.php?mode=Flat Tyre" class="dropdown-item">Flat Tyre</a>
+                                <a href="emergency.php?mode=Engine Failure" class="dropdown-item">Engine Failure</a>
+                <a href="emergency.php?mode=Others" class="dropdown-item">Others</a>
+            </div>
+        </div>
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Status</a>
+                            <div class="dropdown-menu rounded-0 m-0">
+                                <a href="view_request.php" class="dropdown-item">Not paid</a>
+                                <a href="view_paidrequest.php" class="dropdown-item">Paid</a>
+                            </div>
+                        </div>
+                    <a href="view_emergency.php" class="nav-item nav-link">EMERGENCY</a>
+                    <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">MY ACCOUNT</a>
+                            <div class="dropdown-menu rounded-0 m-0">
+                                <a href="profile.php" class="dropdown-item">Profile</a>
+                                <a href="change_password.php" class="dropdown-item">Change Password</a>
+                                <a href="../common/login.php" class="dropdown-item">Logout</a>
+                            </div>
+                        </div>  
+                    </div>
+            </nav>
+        </div>
+    </div>
+    <!-- Navbar End -->
 
 
     

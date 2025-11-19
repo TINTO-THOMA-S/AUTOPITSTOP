@@ -85,7 +85,7 @@ if($tbl!=null)
 {
 	if($newpwd==$cpwd)
 	{
-$sql2="update tbl_login set password='$newpwd' where username='$user' and usertype='admin'";
+$sql2="update tbl_login set password='$newpwd' where username='$user' and usertype='provider'";
 
 setDatas($sql2);
 echo"<script>alert('Success');</script>"; 

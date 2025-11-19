@@ -1,90 +1,66 @@
 <?php
-include_once("../shares/db/mydatabase.inc");
+session_start();
+$user = $_SESSION['userid']; // logged in provider's email
+include("../shares/db/mydatabase.inc");
 include("top.php");
-?>
-<head>
-<style>
-                             
 
-table
-{
-	
-	border:2px solid #17c3a2;
-	border-collapse;
-    border-radius: 6px;
-}
-th
-{
-	color:black;
-	background-color:burlywood;
-    height: 50px;
-    text-align:center;
-    
-}
-    
-   td{
-       	color:black;
-	background-color:beige;
-    height: 40px;
-   	text-align:center;
-   }tr{
-   	text-align:center;
-   }
-   
+// get provider_id from email
+$sql = "SELECT provider_id FROM tbl_service_provider WHERE email='$user'";
+$tbl = getDatas($sql);
+$provider_id = $tbl[0][0];
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>File a Complaint</title>
+<style>
+    body { background:#f2f2f2; font-family:'Segoe UI',sans-serif; }
+    .form-card {
+        background:#fff; max-width:500px; margin:60px auto;
+        padding:30px; border-radius:12px;
+        box-shadow:0 8px 25px rgba(0,0,0,0.2);
+    }
+    h2 { text-align:center; color:#e61212; margin-bottom:20px; }
+    .form-group { margin-bottom:15px; }
+    label { font-weight:bold; display:block; margin-bottom:6px; }
+    textarea {
+        width:100%; padding:12px; border-radius:8px;
+        border:1px solid #ddd; background:#f9f9f9;
+    }
+    button {
+        width:100%; padding:14px;
+        border:none; border-radius:30px;
+        background:#e61212; color:#fff; font-size:16px;
+        font-weight:bold; cursor:pointer;
+    }
+    button:hover { background:#c10f0f; }
 </style>
 </head>
+<body>
+<div class="form-card">
+    <h2>File a Complaint</h2>
+    <form method="post">
+        <div class="form-group">
+            <label>Your Complaint</label>
+            <textarea name="complaint" rows="4" required></textarea>
+        </div>
+        <button type="submit">Submit Complaint</button>
+    </form>
+</div>
+</body>
+</html>
 
- <?php
-$sql="select * from tbl_feedback";
-$tbl=getDatas($sql);
-if($tbl==null)
-{
-   echo "<div style='position:relative;top:350px;color:blue;left:620px;font-size:25px;'>NO FEEDBACKS ADDED.......</div>";}
-else
-{
-	?>
-	<h1 style="position: relative;left:600px;top:60px;color:#17c3a2;">VIEW FEEDBACKS</h1>
-	<table border="4"style="position:relative;left:250px;width:1250px;top:80px;">
-	<tr>
-	<th>PROVIDER NAME</th>	
-	<th>MOBILE NUMBER</th>	
-	<th>EMAIL</th>	
-	<th>FEEDBACK TYPE</th>
-	<th>FEEDBACK</th>
-
-	
-</tr>
-	<?php
-		for($i=0;$i<count($tbl);$i++)
-	{
-for($j=0;$j<count($tbl[$i]);$j++)
-{
-}
-        $provider=$tbl[$i][1];
-      // echo $seller;
-        $sql="SELECT `company_name`, `phone` FROM `tbl_service_provider` WHERE `provider_id`='$provider'";
-        $tb=getDatas($sql);
-        $name=$tb[0][0];
-        $mob=$tb[0][1];
-       // echo $name;
-	?>
-
-<tr>
-    <td><?php echo $name;?></td>
-<td><?php echo $mob ;?></td>
-
-
-
-<td><?php echo $tbl[$i][2];?></td>
-<td><?php echo $tbl[$i][3];?></td>
-    <td><?php echo $tbl[$i][4];?></td>
-
-
-</tr>
 <?php
-}
-}
+if (isset($_POST['complaint'])) {
+    $complaint = $_POST['complaint'];
 
+    $sql = "INSERT INTO tbl_provider_complaint (provider_id, complaint, status) 
+            VALUES ('$provider_id','$complaint','Pending')";
+    setDatas($sql);
+
+    msgbox("Complaint submitted successfully!");
+    nextPage("view_complaints.php");
+}
 ?>
-	
-</table>

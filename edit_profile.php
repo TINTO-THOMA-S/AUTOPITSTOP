@@ -3,6 +3,23 @@ session_start();
 $user = $_SESSION['userid']; // email stored in session
 include_once("../shares/db/mydatabase.inc");
 include("top.php");
+
+// Fetch provider details
+$sql = "SELECT * FROM tbl_service_provider WHERE email='$user'";
+$tbl = getDatas($sql);
+
+if ($tbl != null && count($tbl) > 0) {
+    $provider_id   = $tbl[0][0];
+    $company_name  = $tbl[0][1];
+    $address       = $tbl[0][2];
+    $experience    = $tbl[0][3];
+    $proof         = $tbl[0][4];
+    $phone         = $tbl[0][5];
+    $email         = $tbl[0][6];
+    $website       = $tbl[0][7];
+    $license       = $tbl[0][8];
+    $image         = $tbl[0][9];
+}
 ?>
 
 <head>
@@ -11,46 +28,43 @@ include("top.php");
         background-image:url(../common/image/bg1.jpg);
         background-repeat:no-repeat;
         background-size:cover;
+        font-family:'Segoe UI',sans-serif;
     }
-    .profile-card {
-        background: rgba(255, 255, 255, 0.9);
-        max-width: 600px;
+    .card {
+        max-width: 650px;
+        background-color: rgba(255, 255, 255, 0.95);
         margin: 40px auto;
         border-radius: 15px;
-        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.2);
         padding: 30px;
     }
-    .profile-card h2 {
+    .card h2 {
         text-align: center;
-        margin-bottom: 30px;
-        color: #2c3e50;
+        color: red;
+        margin-bottom: 20px;
     }
-    .profile-table {
+    .form-table {
         width: 100%;
-        border-collapse: collapse;
     }
-    .profile-table td {
-        padding: 10px 0;
-        vertical-align: top;
+    .form-table td {
+        padding: 10px;
         font-size: 16px;
     }
-    .profile-table label {
+    label {
         font-weight: bold;
         color: red;
         text-transform: uppercase;
-        letter-spacing: 1px;
-        font-size: 15px;
     }
-    input[type=text], input[type=number], input[type=file] {
-        border:1px black solid;
-        border-radius: 8px;
-        width:400px;
-        height: 40px;
+    input[type="text"], input[type="number"], input[type="file"] {
+        width: 100%;
         padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 14px;
     }
-    .aa {
+    .btn {
         display: inline-block;
-        margin-top: 25px;
+        margin-top: 20px;
         padding: 12px 20px;
         background-color: red;
         color: white;
@@ -58,84 +72,78 @@ include("top.php");
         text-decoration: none;
         font-weight: bold;
         font-size: 16px;
+        border: none;
+        cursor: pointer;
         transition: background-color 0.3s ease;
     }
-    .aa:hover {
-        background-color: red;
-        color: white;
+    .btn:hover {
+        background-color: darkred;
     }
 </style>
 </head>
 <body>
 
-<?php
-$sql = "SELECT * FROM tbl_owner WHERE email='$user'";
-$tbl = getDatas($sql);
+<div class="card">
+    <h2>Edit Profile</h2>
+    <form action="" method="post" enctype="multipart/form-data">
+        <table class="form-table">
+            <tr><td><label>Company Name:</label></td>
+                <td><input type="text" name="company_name" value="<?php echo $company_name; ?>"></td></tr>
 
-if ($tbl != null) {
-    $name    = $tbl[0][1];
-    $email   = $tbl[0][2];
-    $address = $tbl[0][3];
-    $phone   = $tbl[0][4];
-    $img     = $tbl[0][5];
-}
-?>
+            <tr><td><label>Phone:</label></td>
+                <td><input type="text" name="phone" value="<?php echo $phone; ?>"></td></tr>
 
-<div class="profile-card">
-    <form action="" method="post" enctype="multipart/form-data">   
-        <h2>Edit Profile</h2>
-        <table class="profile-table">
-            <tr>
-                <td><label>Name:</label></td>
-                <td><input type="text" name="name" value="<?php echo $name; ?>" required></td>
-            </tr>
-            <tr>
-                <td><label>Email:</label></td>
-                <td><input type="text" name="email" value="<?php echo $email; ?>" readonly></td>
-            </tr>
-            <tr>
-                <td><label>Address:</label></td>
-                <td><input type="text" name="address" value="<?php echo $address; ?>" required></td>
-            </tr>
-            <tr>
-                <td><label>Phone:</label></td>
-                <td><input type="number" name="phone" value="<?php echo $phone; ?>" required></td>
-            </tr>
-            <tr>
-                <td><label>Profile Image:</label></td>
+            <tr><td><label>Address:</label></td>
+                <td><input type="text" name="address" value="<?php echo $address; ?>"></td></tr>
+
+            <tr><td><label>Experience:</label></td>
+                <td><input type="number" name="experience" value="<?php echo $experience; ?>"></td></tr>
+
+            <tr><td><label>Website:</label></td>
+                <td><input type="text" name="website" value="<?php echo $website; ?>"></td></tr>
+
+            <tr><td><label>License No:</label></td>
+                <td><input type="text" name="license" value="<?php echo $license; ?>"></td></tr>
+
+            <tr><td><label>Profile Image:</label></td>
                 <td>
+                    <img src="../uploads/<?php echo $image; ?>" width="100" height="100" style="border-radius:8px;"><br>
                     <input type="file" name="image">
-                    <?php if($img != "") { ?>
-                        <br><img src="<?php echo $img; ?>" width="100" height="100" style="margin-top:10px;border-radius:8px;">
-                    <?php } ?>
                 </td>
             </tr>
         </table>
         <center>
-            <input type="submit" class="aa" value="UPDATE"><br><br>
-            <a class="aa" href="view_profile.php">GO TO MY PROFILE</a>
+            <button type="submit" class="btn" name="update">Update</button>
+            <a href="profile.php" class="btn">Cancel</a>
         </center>
     </form>
 </div>
 
 <?php
-if (isset($_POST['name'])) {
-    $a = $_POST['name'];
-    $f = $_POST['address'];
-    $h = $_POST['phone'];
+if (isset($_POST['update'])) {
+    $company_name = $_POST['company_name'];
+    $phone        = $_POST['phone'];
+    $address      = $_POST['address'];
+    $experience   = $_POST['experience'];
+    $website      = $_POST['website'];
+    $license      = $_POST['license'];
 
-    $imgPath = $img; // keep old if not updated
-    if (!empty($_FILES["image"]["name"])) {
-        $fldr = "../uploads";
-        $fileName = $_FILES["image"]["name"];
-        $tmpName  = $_FILES["image"]["tmp_name"];
-        $imgPath  = $fldr."/".$fileName;
-        move_uploaded_file($tmpName, $imgPath);
+    // Handle image upload if new file provided
+    if (!empty($_FILES['image']['name'])) {
+        $image = time() . "_" . $_FILES['image']['name'];
+        move_uploaded_file($_FILES['image']['tmp_name'], "../uploads/" . $image);
     }
 
-    $sql = "UPDATE tbl_owner 
-            SET name='$a', address='$f', phone='$h', image='$imgPath' 
+    $sql = "UPDATE tbl_service_provider 
+            SET company_name='$company_name',
+                address='$address',
+                experience='$experience',
+                phone='$phone',
+                website='$website',
+                license_number='$license',
+                image='$image'
             WHERE email='$user'";
+
     setDatas($sql);
     msgbox("Profile updated successfully!");
     nextPage("profile.php");

@@ -11,73 +11,77 @@ include("../shares/db/mydatabase.inc");
 <meta charset="UTF-8">
 <title>Add Services</title>
 <style>
+/* Body Styling */
 body {
     margin: 0;
     padding: 0;
-    background: linear-gradient(135deg, #dfe9f3 0%, #ffffff 100%);
+    background: var(--light, #F4F5F8);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Centered Glassmorphism Card */
+/* Main Container */
 .container1 {
     max-width: 700px;
     margin: 80px auto;
     padding: 40px;
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(10px);
+    background: #fff;
     border-radius: 15px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 6px 20px rgba(43, 46, 74, 0.15);
+    border-top: 5px solid #F77D0A;
+    transition: all 0.3s ease;
+}
+
+.container1:hover {
+    transform: translateY(-3px);
 }
 
 /* Heading */
 .container1 h1 {
     text-align: center;
-    color: #222;
-    letter-spacing: 1px;
+    color: #2B2E4A;
     margin-bottom: 25px;
     font-size: 28px;
-    text-transform: uppercase;
     font-weight: 700;
-    border-bottom: 3px solid #04AA6D;
-    padding-bottom: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }
 
 /* Label Styles */
 label {
-    color: #333;
+    color: #2B2E4A;
     font-weight: 600;
     display: block;
-    margin-top: 10px;
+    margin-top: 12px;
     margin-bottom: 5px;
 }
 
-/* Input Fields */
+/* Input Fields & Select */
 input[type=text],
 input[type=password],
 input[type=email],
 input[type=date],
 select {
     width: 100%;
-    padding: 14px;
-    border: 2px solid #ddd;
+    padding: 12px 14px;
+    border: 1.8px solid #ddd;
     border-radius: 8px;
-    background-color: #f9f9f9;
+    background-color: #fafafa;
     font-size: 15px;
     transition: 0.3s ease;
 }
 
 input:focus,
 select:focus {
-    border-color: #04AA6D;
-    background: #fff;
+    border-color: #F77D0A;
+    background-color: #fff;
     outline: none;
-    box-shadow: 0 0 5px rgba(4,170,109,0.3);
+    box-shadow: 0 0 6px rgba(247, 125, 10, 0.3);
 }
 
 /* Button */
 .registerbtn {
-    background-color: #04AA6D;
-    color: white;
+    background-color: #F77D0A;
+    color: #fff;
     padding: 14px;
     margin-top: 25px;
     border: none;
@@ -85,11 +89,13 @@ select:focus {
     width: 100%;
     font-size: 17px;
     border-radius: 8px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
     transition: all 0.3s ease;
 }
 
 .registerbtn:hover {
-    background-color: #039e66;
+    background-color: #2B2E4A;
     transform: scale(1.03);
 }
 
@@ -98,7 +104,7 @@ select:focus {
     color: #999;
 }
 
-/* Responsive */
+/* Responsive Design */
 @media screen and (max-width: 768px) {
     .container1 {
         width: 90%;
@@ -120,34 +126,39 @@ $sname=$tbl[0][1];
 ?>
 
 <div class="container1">
-    <h1>EMERGENCIES</h1>
+    <h1>ADD SERVICES</h1>
     <form action="" method="post" data-toggle="validator" enctype="multipart/form-data">
 
         <label for="firstname">SERVICE NAME:</label>
         <input type="text" name="name" value="<?php echo $sname;?>" readonly>
         <input type="hidden" name="fid" value="<?php echo $fid;?>">
 
-        <label for="house">EMERGENCY TYPE:</label>
+        <label for="house">CATEGORY:</label>
         <select name="category" required>
-            <option value="">-- Select Type --</option>
-            <option value="Accident">Accident</option>
-            <option value="Breakdown">Breakdown</option>
-            <option value="FlatTyre">Flat Tyre</option>
-            <option value="EngineFailure">Engine Failure</option>
-            <option value="Others">Others</option>
-          </select>
-       
+            <option value="">--Select--</option>
+            <?php
+            $sql="SELECT * FROM add_category";
+            $tbl=getDatas($sql);
+            foreach($tbl as $row){
+            ?> 
+            <option value="<?php echo $row[1];?>"><?php echo $row[1];?></option>
+            <?php } ?>
+        </select>
 
         <label for="district">DISTRICT:</label>
         <input type="text" name="district" placeholder="Enter District" required>
 
-        <label for="city">LOCATION:</label>
-        <input type="text" name="city" placeholder="Enter locatio" required>
+        <label for="city">CITY:</label>
+        <input type="text" name="city" placeholder="Enter City" required>
 
-<label for="mobile">CONTACT NUMBER:</label>
+        <label for="pincode">AMOUNT:</label>
+        <input type="text" name="amount" placeholder="Enter Amount" required>
+
+        <label for="mobile">CONTACT NUMBER:</label>
         <input type="text" name="mobile" placeholder="Enter Mobile Number" required>
 
- 
+        <label for="days">NEEDED DAYS:</label>
+        <input type="text" name="days" placeholder="Enter Required Days" required>
 
         <label for="description">DESCRIPTION:</label>
         <input type="text" name="description" placeholder="Enter Description" required>
@@ -170,15 +181,16 @@ if(isset($_POST['name']))
     $c=$_POST['fid'];
     $d=$_POST['district'];
     $e=$_POST['city'];
+    $f=$_POST['amount'];
     $g=$_POST['mobile'];
     $h=$_POST['category'];
+    $i=$_POST['days'];
     $j=$_POST['description'];
-    
 
-$sql="insert into tbl_emergency(`emergency_id`,`provider_id`,`category`,`location`,`district`,`mobile number`,`description`,`availability`) 
-    values('$b','$c','$h','$e','$d','$g','$j','yes')";
+    $sql="insert into tbl_service(`service_id`,`provider_id`,`category`,`district`,`city`,`amount`,`mobileno`,`days`, `description`,`availibility`) 
+    values('$b','$c','$h','$d','$e','$f','$g','$i','$j','yes')";
     setDatas($sql);
     msgbox("Successfully registered!");
-    
+    nextpage("view_serviceinfo.php");
 }
 ?>

@@ -2,9 +2,8 @@
 <html lang="en">
 
 <head>
-    <style></style>
     <meta charset="utf-8">
-    <title>Autopit-stop</title>
+    <title>ROYAL CARS - Car Rental HTML Template</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
@@ -28,11 +27,6 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
-    
-    <link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-/>
 </head>
 
 <body>
@@ -71,94 +65,42 @@
 
 
     <!-- Navbar Start -->
-<div class="container-fluid position-relative nav-bar p-0">
-  <div class="position-relative px-lg-5" style="z-index: 9;">
-    <nav class="navbar navbar-expand-lg bg-secondary navbar-dark py-3 py-lg-0 pl-3 pl-lg-5">
-      <a href="index.php" class="navbar-brand d-flex align-items-center">
-        <i class="fa-solid fa-car-wrench text-warning mr-2" style="font-size: 26px;"></i>
-        <h1 class="text-uppercase text-primary mb-0">AUTOPIT</h1>
-      </a>
-      <button
-        type="button"
-        class="navbar-toggler"
-        data-toggle="collapse"
-        data-target="#navbarCollapse"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
-        <div class="navbar-nav ml-auto py-0">
-          <a href="index.php" class="nav-item nav-link active">
-            <i class="fa-solid fa-house text-warning mr-1"></i>Home
-          </a>
-          <a href="about.php" class="nav-item nav-link">
-            <i class="fa-solid fa-circle-info text-warning mr-1"></i>About
-          </a>
-          <div class="nav-item dropdown">
-            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-              <i class="fa-solid fa-screwdriver-wrench text-warning mr-1"></i>Service
-            </a>
-            <div class="dropdown-menu rounded-0 m-0">
-              <a href="service.php" class="dropdown-item">
-                <i class="fa-solid fa-plus-circle text-warning mr-2"></i>Add Service
-              </a>
-              <a href="view_serviceinfo.php" class="dropdown-item">
-                <i class="fa-solid fa-eye text-warning mr-2"></i>View Service
-              </a>
-            </div>
-          </div>
-          <a href="view_approved.php" class="nav-item nav-link">
-            <i class="fa-solid fa-calendar-check text-warning mr-1"></i>Booking
-          </a>
-          <a href="viewreq.php" class="nav-item nav-link">
-            <i class="fa-solid fa-handshake text-warning mr-1"></i>Request
-          </a>
-          <div class="nav-item dropdown">
-            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-              <i class="fa-solid fa-triangle-exclamation text-warning mr-1"></i>Emergency
-            </a>
-            <div class="dropdown-menu rounded-0 m-0">
-              <a href="emergency.php" class="dropdown-item">
-                <i class="fa-solid fa-bolt text-warning mr-2"></i>New Emergency Service
-              </a>
-              <a href="view_emergency_request.php" class="dropdown-item">
-                <i class="fa-solid fa-list text-warning mr-2"></i>Emergency Request
-              </a>
-              <a href="emergency_approved.php" class="dropdown-item">
-                <i class="fa-solid fa-check-circle text-warning mr-2"></i>Emergency Approved
-              </a>
-            </div>
-          </div>
-            <a href="feedback.php" class="nav-item nav-link">
-            <i class="fa-solid fa-calendar-check text-warning mr-1"></i>Feedback
-          </a>
-          <div class="nav-item dropdown">
-            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-              <i class="fa-solid fa-user-circle text-warning mr-1"></i>My Account
-            </a>
-            <div class="dropdown-menu rounded-0 m-0">
-                <a href="profile.php" class="dropdown-item">
-                <i class="fa-solid fa-user-gear text-warning mr-1"></i>Profile
-              </a>
-              <a href="change_password.php" class="dropdown-item">
-                <i class="fa-solid fa-key text-warning mr-2"></i>Change Password
-              </a>
-              <a href="../common/login.php" class="dropdown-item">
-                <i class="fa-solid fa-right-from-bracket text-warning mr-2"></i>Sign Out
-              </a>
-            </div>
-          </div>
+    <div class="container-fluid position-relative nav-bar p-0">
+        <div class="position-relative px-lg-5" style="z-index: 9;">
+            <nav class="navbar navbar-expand-lg bg-secondary navbar-dark py-3 py-lg-0 pl-3 pl-lg-5">
+                <a href="" class="navbar-brand">
+                    <h1 class="text-uppercase text-primary mb-1">AUTO PIT</h1>
+                </a>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
+                    <div class="navbar-nav ml-auto py-0">
+                        <a href="index.html" class="nav-item nav-link active">Home</a>
+                        <a href="about.html" class="nav-item nav-link">About</a>
+                        <a href="service.html" class="nav-item nav-link">Service</a>
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Cars</a>
+                            <div class="dropdown-menu rounded-0 m-0">
+                                <a href="car.html" class="dropdown-item">Car Listing</a>
+                                <a href="detail.html" class="dropdown-item">Car Detail</a>
+                                <a href="booking.html" class="dropdown-item">Car Booking</a>
+                            </div>
+                        </div>
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
+                            <div class="dropdown-menu rounded-0 m-0">
+                                <a href="team.html" class="dropdown-item">The Team</a>
+                                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                            </div>
+                        </div>
+                        <a href="contact.html" class="nav-item nav-link">Contact</a>
+                    </div>
+                </div>
+            </nav>
         </div>
-      </div>
-    </nav>
-  </div>
-</div>
-<!-- Navbar End -->
-
-<!-- Font Awesome 6 (add this once in <head> if not already included) -->
-
-
+    </div>
+    <!-- Navbar End -->
 
 
     
